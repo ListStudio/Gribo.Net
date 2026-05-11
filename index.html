@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Грибо.Net - Браузер с AI Лисичка</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Браузер -->
+        <div class="browser-section">
+            <div class="browser-header">
+                <button id="backBtn" class="nav-btn">←</button>
+                <button id="forwardBtn" class="nav-btn">→</button>
+                <button id="refreshBtn" class="nav-btn">⟲</button>
+                <input type="text" id="urlBar" class="url-bar" placeholder="Введите URL...">
+                <button id="goBtn" class="go-btn">Перейти</button>
+            </div>
+            <iframe id="browserFrame" class="browser-frame"></iframe>
+        </div>
+
+        <!-- Панель управления -->
+        <div class="control-panel">
+            <!-- Чат с Лисичка.AI -->
+            <div class="chat-section">
+                <div class="section-header">
+                    <h2>💬 Лисичка.AI - Чат</h2>
+                    <button id="toggleChat" class="toggle-btn">−</button>
+                </div>
+                <div id="chatContainer" class="chat-container">
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="chat-input-group">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            class="chat-input" 
+                            placeholder="Напишите сообщение Лисичке..."
+                            autocomplete="off"
+                        >
+                        <button id="sendBtn" class="send-btn">Отправить</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Звонки с Лисичка.AI -->
+            <div class="call-section">
+                <div class="section-header">
+                    <h2>📞 Лисичка.AI - Звонок</h2>
+                    <button id="toggleCall" class="toggle-btn">−</button>
+                </div>
+                <div id="callContainer" class="call-container">
+                    <div class="call-status" id="callStatus">Не в разговоре</div>
+                    <div class="call-controls">
+                        <button id="startCallBtn" class="call-btn start-call">Начать звонок</button>
+                        <button id="endCallBtn" class="call-btn end-call" disabled>Завершить звонок</button>
+                    </div>
+                    <div class="call-transcript" id="callTranscript"></div>
+                    <div class="audio-visualizer">
+                        <canvas id="audioCanvas" width="300" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Настройки API -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>⚙️ Настройки</h2>
+                    <button id="toggleSettings" class="toggle-btn">−</button>
+                </div>
+                <div id="settingsContainer" class="settings-container">
+                    <div class="setting-group">
+                        <label for="apiKey">API ключ Лисичка.AI:</label>
+                        <input 
+                            type="password" 
+                            id="apiKey" 
+                            class="api-input" 
+                            placeholder="Введите API ключ"
+                        >
+                    </div>
+                    <div class="setting-group">
+                        <label for="apiUrl">API URL:</label>
+                        <input 
+                            type="text" 
+                            id="apiUrl" 
+                            class="api-input" 
+                            value="https://api.lisichka.ai"
+                            placeholder="https://api.lisichka.ai"
+                        >
+                    </div>
+                    <button id="saveSettings" class="save-btn">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
