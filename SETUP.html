@@ -1,0 +1,205 @@
+<!-- 
+  Пример использования конфигурации Грибо.Net
+  Копируйте этот файл и модифицируйте под свои нужды
+-->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Грибо.Net - Конфигурация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .config-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="config-box">
+        <h1>⚙️ Конфигурация Грибо.Net</h1>
+        
+        <h2>1. Получение API ключа Лисичка.AI</h2>
+        <ol>
+            <li>Перейдите на <a href="https://lisichka.ai" target="_blank">Лисичка.AI</a></li>
+            <li>Зарегистрируйтесь или войдите в аккаунт</li>
+            <li>Перейдите в раздел "API ключи"</li>
+            <li>Создайте новый API ключ</li>
+            <li>Скопируйте ключ (выглядит примерно так: <code>sk_live_xxxxx</code>)</li>
+        </ol>
+
+        <h2>2. Добавление ключа в приложение</h2>
+        <p>Есть два способа:</p>
+        
+        <h3>Способ 1: Через интерфейс приложения</h3>
+        <ol>
+            <li>Откройте <code>index.html</code> в браузере</li>
+            <li>Кликните на кнопку <strong>⚙️ Настройки</strong></li>
+            <li>В поле "API ключ Лисичка.AI" вставьте ваш ключ</li>
+            <li>Нажмите <strong>Сохранить</strong></li>
+        </ol>
+
+        <h3>Способ 2: Программно (в коде)</h3>
+        <p>Добавьте в <code>app.js</code> после строки конфигурации:</p>
+        <pre>// Автоматическая установка ключа
+localStorage.setItem('lisichka_api_key', 'sk_live_ваш_ключ_здесь');
+localStorage.setItem('lisichka_api_url', 'https://api.lisichka.ai');</pre>
+
+        <h2>3. Проверка конфигурации</h2>
+        <ol>
+            <li>Откройте консоль браузера (F12 → Console)</li>
+            <li>Выполните команду:
+                <pre>console.log(localStorage.getItem('lisichka_api_key'))</pre>
+            </li>
+            <li>Если ключ отображается - конфигурация успешна ✅</li>
+        </ol>
+
+        <h2>4. Переменные конфигурации</h2>
+        <pre>CONFIG = {
+    apiKey: 'sk_live_xxxxx',      // API ключ Лисичка.AI
+    apiUrl: 'https://api.lisichka.ai'  // URL сервера
+}</pre>
+
+        <h2>5. LocalStorage переменные</h2>
+        <table border="1" cellpadding="10" style="width:100%; margin-top:10px;">
+            <tr>
+                <th>Переменная</th>
+                <th>Назначение</th>
+                <th>Пример</th>
+            </tr>
+            <tr>
+                <td><code>lisichka_api_key</code></td>
+                <td>API ключ</td>
+                <td><code>sk_live_xxxxx</code></td>
+            </tr>
+            <tr>
+                <td><code>lisichka_api_url</code></td>
+                <td>URL API сервера</td>
+                <td><code>https://api.lisichka.ai</code></td>
+            </tr>
+            <tr>
+                <td><code>chat_history</code></td>
+                <td>История чатов (JSON)</td>
+                <td><code>[{"sender":"user","text":"Привет"}]</code></td>
+            </tr>
+            <tr>
+                <td><code>conversation_id</code></td>
+                <td>ID разговора</td>
+                <td><code>conv_1234567890</code></td>
+            </tr>
+        </table>
+
+        <h2>6. Примеры API запросов</h2>
+        <h3>Чат</h3>
+        <pre>fetch('https://api.lisichka.ai/chat', {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer sk_live_xxxxx',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        message: 'Привет!',
+        conversation_id: 'conv_123'
+    })
+})
+.then(r => r.json())
+.then(data => console.log(data.response))</pre>
+
+        <h3>Звонок</h3>
+        <pre>fetch('https://api.lisichka.ai/call/start', {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer sk_live_xxxxx',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        action: 'start',
+        audio_sample_rate: 16000
+    })
+})</pre>
+
+        <h2>7. Проверка подключения</h2>
+        <pre>// Тест подключения к API
+async function testConnection() {
+    try {
+        const response = await fetch(
+            `${CONFIG.apiUrl}/health`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${CONFIG.apiKey}`
+                }
+            }
+        );
+        if (response.ok) {
+            console.log('✅ Подключение успешно!');
+        } else {
+            console.log('❌ Ошибка подключения');
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
+// Вызовите в консоли:
+testConnection();</pre>
+
+        <h2>8. Troubleshooting</h2>
+        <table border="1" cellpadding="10" style="width:100%; margin-top:10px;">
+            <tr>
+                <th>Проблема</th>
+                <th>Решение</th>
+            </tr>
+            <tr>
+                <td>❌ API ключ не работает</td>
+                <td>Проверьте, что ключ скопирован полностью без пробелов</td>
+            </tr>
+            <tr>
+                <td>❌ Чат не отправляет сообщения</td>
+                <td>Убедитесь, что API ключ установлен в настройках</td>
+            </tr>
+            <tr>
+                <td>❌ Звонок не работает</td>
+                <td>Разрешите доступ к микрофону браузером</td>
+            </tr>
+            <tr>
+                <td>❌ Ошибка CORS</td>
+                <td>Проверьте что URL API содержит <code>https://</code></td>
+            </tr>
+        </table>
+
+        <h2>9. Безопасность</h2>
+        <p style="background:#fff3cd; padding:10px; border-radius:5px;">
+            ⚠️ <strong>Важно!</strong> Никогда не делитесь вашим API ключом!
+            Храните его в безопасности и удаляйте из истории коммитов.
+        </p>
+
+        <h2>10. Дополнительные ресурсы</h2>
+        <ul>
+            <li><a href="https://lisichka.ai/docs" target="_blank">Документация Лисичка.AI</a></li>
+            <li><a href="https://github.com/ListStudio/Gribo.net" target="_blank">GitHub репозиторий</a></li>
+            <li>Открыть <code>index.html</code> для использования приложения</li>
+        </ul>
+    </div>
+</body>
+</html>
