@@ -11,13 +11,21 @@
         <!-- Браузер -->
         <div class="browser-section">
             <div class="browser-header">
-                <button id="backBtn" class="nav-btn">←</button>
-                <button id="forwardBtn" class="nav-btn">→</button>
-                <button id="refreshBtn" class="nav-btn">⟲</button>
-                <input type="text" id="urlBar" class="url-bar" placeholder="Введите URL...">
+                <input type="text" id="urlBar" class="url-bar" placeholder="Введите ссылку или поиск...">
                 <button id="goBtn" class="go-btn">Перейти</button>
             </div>
-            <iframe id="browserFrame" class="browser-frame"></iframe>
+            <div id="browserContent" class="browser-content">
+                <div class="welcome-screen">
+                    <h1>🦊 Добро пожаловать в Грибо.Net!</h1>
+                    <p>Введите URL или поисковый запрос в строку выше</p>
+                    <div class="quick-links">
+                        <a href="#" onclick="openSite('https://google.com'); return false;" class="link-btn">Google</a>
+                        <a href="#" onclick="openSite('https://youtube.com'); return false;" class="link-btn">YouTube</a>
+                        <a href="#" onclick="openSite('https://wikipedia.org'); return false;" class="link-btn">Wikipedia</a>
+                        <a href="#" onclick="openSite('https://reddit.com'); return false;" class="link-btn">Reddit</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Панель управления -->
@@ -35,11 +43,12 @@
                             type="text" 
                             id="chatInput" 
                             class="chat-input" 
-                            placeholder="Напишите сообщение Лисичке..."
+                            placeholder="Напишите Лисичке..."
                             autocomplete="off"
                         >
                         <button id="sendBtn" class="send-btn">Отправить</button>
                     </div>
+                    <div class="status-text" id="statusText"></div>
                 </div>
             </div>
 
@@ -53,42 +62,31 @@
                     <div class="call-status" id="callStatus">Не в разговоре</div>
                     <div class="call-controls">
                         <button id="startCallBtn" class="call-btn start-call">Начать звонок</button>
-                        <button id="endCallBtn" class="call-btn end-call" disabled>Завершить звонок</button>
+                        <button id="endCallBtn" class="call-btn end-call" disabled>Завершить</button>
                     </div>
-                    <div class="call-transcript" id="callTranscript"></div>
+                    <div class="call-transcript" id="callTranscript">Ожидание звонка...</div>
                     <div class="audio-visualizer">
                         <canvas id="audioCanvas" width="300" height="100"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Настройки API -->
+            <!-- Информация -->
             <div class="settings-section">
                 <div class="section-header">
-                    <h2>⚙️ Настройки</h2>
+                    <h2>ℹ️ Информация</h2>
                     <button id="toggleSettings" class="toggle-btn">−</button>
                 </div>
                 <div id="settingsContainer" class="settings-container">
-                    <div class="setting-group">
-                        <label for="apiKey">API ключ Лисичка.AI:</label>
-                        <input 
-                            type="password" 
-                            id="apiKey" 
-                            class="api-input" 
-                            placeholder="Введите API ключ"
-                        >
-                    </div>
-                    <div class="setting-group">
-                        <label for="apiUrl">API URL:</label>
-                        <input 
-                            type="text" 
-                            id="apiUrl" 
-                            class="api-input" 
-                            value="https://api.lisichka.ai"
-                            placeholder="https://api.lisichka.ai"
-                        >
-                    </div>
-                    <button id="saveSettings" class="save-btn">Сохранить</button>
+                    <p style="margin: 0; color: #666; font-size: 13px;">
+                        <strong>Грибо.Net v1.0</strong><br>
+                        Браузер с AI Лисичкой<br><br>
+                        ✅ Используется бесплатный API<br>
+                        ✅ Hugging Face Inference API<br>
+                        ✅ Никаких платежей не требуется<br><br>
+                        <strong>Автор:</strong> ListStudio<br>
+                        <strong>GitHub:</strong> <a href="https://github.com/ListStudio/Gribo.net" target="_blank" style="color: #667eea;">ListStudio/Gribo.net</a>
+                    </p>
                 </div>
             </div>
         </div>
