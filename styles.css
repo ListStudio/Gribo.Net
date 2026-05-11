@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 15px;
+    max-width: 1600px;
+    margin: 0 auto;
+    height: 95vh;
+}
+
+/* ===== БРАУЗЕР ===== */
+.browser-section {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.browser-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: #e8e8e8;
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.url-bar {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.url-bar:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 4px rgba(102, 126, 234, 0.3);
+}
+
+.go-btn {
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.go-btn:hover {
+    background: #5568d3;
+}
+
+.browser-frame {
+    flex: 1;
+    border: none;
+}
+
+/* ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== */
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.chat-section,
+.call-section,
+.settings-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.toggle-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== ЧАТ ===== */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+    min-height: 250px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 0;
+    max-height: 200px;
+}
+
+.chat-message {
+    padding: 10px 12px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    background: #667eea;
+    color: white;
+    margin-left: 20px;
+    border-radius: 12px 4px 12px 12px;
+}
+
+.ai-message {
+    background: #f0f0f0;
+    color: #333;
+    margin-right: 20px;
+    border-radius: 4px 12px 12px 12px;
+}
+
+.chat-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.chat-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 4px rgba(102, 126, 234, 0.3);
+}
+
+.send-btn {
+    padding: 10px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.send-btn:hover {
+    background: #5568d3;
+}
+
+.send-btn:active {
+    transform: scale(0.98);
+}
+
+/* ===== ЗВОНКИ ===== */
+.call-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    min-height: 280px;
+}
+
+.call-status {
+    text-align: center;
+    padding: 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #666;
+    font-size: 14px;
+}
+
+.call-status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.call-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.call-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.start-call {
+    background: #28a745;
+    color: white;
+}
+
+.start-call:hover:not(:disabled) {
+    background: #218838;
+}
+
+.end-call {
+    background: #dc3545;
+    color: white;
+}
+
+.end-call:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.call-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.call-transcript {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 13px;
+    max-height: 120px;
+    overflow-y: auto;
+    color: #555;
+    line-height: 1.5;
+    min-height: 50px;
+}
+
+.audio-visualizer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+#audioCanvas {
+    border-radius: 4px;
+}
+
+/* ===== НАСТРОЙКИ ===== */
+.settings-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.setting-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 13px;
+}
+
+.api-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: monospace;
+}
+
+.api-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 4px rgba(102, 126, 234, 0.3);
+}
+
+.save-btn {
+    padding: 10px 16px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.save-btn:hover {
+    background: #218838;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .control-panel {
+        max-height: 400px;
+    }
+}
+
+/* ===== СКРОЛЛБАР ===== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
